@@ -5,7 +5,7 @@ package dream.first.v1.utils;
 
 import java.io.File;
 
-import org.yelong.core.model.Model;
+import org.yelong.core.model.Modelable;
 import org.yelong.core.model.manage.ModelAndTable;
 import org.yelong.core.model.pojo.POJOModelResolver;
 import org.yelong.core.model.pojo.annotation.AnnotationFieldResolver;
@@ -44,7 +44,7 @@ public class CodeGenerateUtils {
 	 * @throws ExtjsGenerateException
 	 * @throws JSPGenerateException
 	 */
-	public static final void generate(Class<? extends Model> modelClass, String codePath)
+	public static final void generate(Class<? extends Modelable> modelClass, String codePath)
 			throws ExtjsGenerateException, JSPGenerateException {
 		ModelAndTable modelAndTable = modelResolver.resolve(modelClass);
 		String modelClassSimpleName = modelAndTable.getModelClass().getSimpleName();
