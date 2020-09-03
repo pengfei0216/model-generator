@@ -1,4 +1,4 @@
-package dream.first.demo.utils;
+package dream.first.model.generator.demo.utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,20 +8,22 @@ import org.yelong.core.model.support.generator.GFieldAndColumnInterceptor;
 import org.yelong.core.model.support.generator.GFieldAndColumnWrapper;
 import org.yelong.core.model.support.generator.GModelAndTable;
 
-import dream.first.extjs.model.support.generator.js.ExtjsGenerateException;
-import dream.first.extjs.model.support.generator.js.ExtjsGenerator;
-import dream.first.extjs.model.support.generator.js.impl.defaults.DefaultExtjsGenerator;
-import dream.first.extjs.model.support.generator.js.impl.defaults._2.DefaultExtjsGenerator2;
+import dream.first.extjs.model.support.generator.js.ExtJSGenerator;
+import dream.first.extjs.model.support.generator.js.impl.defaults.v1.DefaultExtJSGenerator_v1;
+import dream.first.extjs.model.support.generator.js.impl.defaults.v2.DefaultExtJSGenerator_v2;
+import dream.first.extjs.model.support.generator.js.impl.file.DefaultFileModelExtJSGenerator;
 
-public final class ExtjsGenerateUtils {
+public final class ExtJSGenerateUtils {
 
-	public static ExtjsGenerator extjsGenerator = new DefaultExtjsGenerator();
+	public static ExtJSGenerator extjsGenerator = new DefaultExtJSGenerator_v1();
 
-	public static ExtjsGenerator extjsGenerator2 = new DefaultExtjsGenerator2();
+	public static ExtJSGenerator extjsGenerator2 = new DefaultExtJSGenerator_v2();
+
+	public static ExtJSGenerator extjsGenerator_file = new DefaultFileModelExtJSGenerator();
 
 	private static final List<String> IGNORE_FIELD_NAME = new ArrayList<>();
 
-	private ExtjsGenerateUtils() {
+	private ExtJSGenerateUtils() {
 	}
 
 	static {
@@ -45,14 +47,19 @@ public final class ExtjsGenerateUtils {
 		};
 		extjsGenerator.addFieldAndColumnInterceptor(fieldAndColumnInterceptor);
 		extjsGenerator2.addFieldAndColumnInterceptor(fieldAndColumnInterceptor);
+		extjsGenerator_file.addFieldAndColumnInterceptor(fieldAndColumnInterceptor);
 	}
 
-	public static void generate_1(GModelAndTable modelAndTable, File jsFile) throws ExtjsGenerateException {
+	public static void generate_1(GModelAndTable modelAndTable, File jsFile) throws Exception {
 		extjsGenerator.generate(modelAndTable, jsFile);
 	}
 
-	public static void generate_2(GModelAndTable modelAndTable, File jsFile) throws ExtjsGenerateException {
+	public static void generate_2(GModelAndTable modelAndTable, File jsFile) throws Exception {
 		extjsGenerator2.generate(modelAndTable, jsFile);
+	}
+
+	public static void generateFile(GModelAndTable modelAndTable, File jsFile) throws Exception {
+		extjsGenerator_file.generate(modelAndTable, jsFile);
 	}
 
 }
